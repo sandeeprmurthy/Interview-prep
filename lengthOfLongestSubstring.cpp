@@ -2,7 +2,7 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         
-        // Idea is start with the first position and find the longest substring
+/*        // Idea is start with the first position and find the longest substring
         // then move on to the next position and repeat
         // print string with largest string length
 
@@ -39,5 +39,23 @@ public:
 
         return max_length;
 
+    }*/
+
+    unordered_map<char, int> charMap;
+    int start = 0;
+    int maxLength = 0;
+    
+    for(int end = 0; end < s.length(); end++) {
+        char endChar = s[end];
+        
+        if(charMap.count(endChar) == 1) {
+            start = max(start, charMap[endChar] + 1);
+        }
+        
+        charMap[endChar] = end;
+        maxLength = max(maxLength, end - start + 1);
     }
+    
+    return maxLength;
+
 };
